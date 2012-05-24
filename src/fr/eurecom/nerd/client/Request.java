@@ -27,7 +27,7 @@ public class Request {
       POST
     }    
     
-    protected static String request(
+    protected static synchronized String request(
                                         String uri,
                                         RequestType method, 
                                         MultivaluedMap<String, String> queryParams

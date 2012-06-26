@@ -46,7 +46,7 @@ public class NERD {
      * @throws TypeExpection 
      *
      */
-    public String extractionJSON(   Extractor extractor, String text,
+    public String extractionJSON(   ExtractorType extractor, String text,
                                     String language, Boolean duplicate
                                  ) 
     throws TypeExpection 
@@ -63,7 +63,7 @@ public class NERD {
     /**
     *
     */
-   public List<Extraction> extraction(  Extractor extractor, String text,
+   public List<Extraction> extraction(  ExtractorType extractor, String text,
                                         String language, Boolean duplicate
                                      )
    throws TypeExpection

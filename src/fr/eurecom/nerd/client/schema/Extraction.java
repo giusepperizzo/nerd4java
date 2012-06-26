@@ -26,6 +26,20 @@ public class Extraction {
     private String uri;
     private Double confidence;
     private Double relevance;
+    private String source;
+    
+    public Extraction ( String entity, 
+                        Integer startChar, 
+                        Integer endChar, 
+                        String type, 
+                        String source )
+    {
+        this.entity = entity;
+        this.startChar = startChar;
+        this.endChar = endChar;
+        this.type = type;
+        this.source = source;
+    }
     
     public Integer getStartChar() {
         return startChar;
@@ -82,6 +96,13 @@ public class Extraction {
         this.relevance = relevance;
     }
     
+    public String getSource() {
+        return source;
+    }
+    public void setSource(String source) {
+        this.source = source;
+    }
+
     public static final Comparator<Extraction> ENTITYPOSITION = 
             new Comparator<Extraction>() {
                 public int compare(Extraction e1, Extraction e2) {  

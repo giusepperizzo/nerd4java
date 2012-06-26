@@ -15,8 +15,49 @@
 package fr.eurecom.nerd.client;
 
 public class LookUp {
+    
+    public static ExtractorType mapToType(String extractor) throws TypeExpection 
+    {
+        if(extractor.equals("alchemyapi")) 
+            return ExtractorType.ALCHEMYAPI;
+                
+        else if (extractor.equals("spotlight"))
+            return ExtractorType.DBPEDIA_SPOTLIGHT;
+        
+        else if (extractor.equals("evri"))
+            return ExtractorType.EVRI;
+        
+        else if (extractor.equals("extractiv"))
+            return ExtractorType.EXTRACTIV;
 
-    protected static String map(Extractor extractor) throws TypeExpection 
+        else if (extractor.equals("lupedia"))
+            return ExtractorType.LUPEDIA;
+                
+        else if (extractor.equals("nerde"))
+            return ExtractorType.NERDE;
+                
+        else if (extractor.equals("opencalais"))
+            return ExtractorType.OPENCALAIS;
+        
+        else if (extractor.equals("saplo"))
+            return ExtractorType.SAPLO;        
+        
+        else if (extractor.equals("wikimeta"))
+            return ExtractorType.WIKIMETA;
+        
+        else if(extractor.equals("yahoo"))
+            return ExtractorType.YAHOO;
+        
+        else if(extractor.equals("zemanta"))
+            return ExtractorType.ZEMANTA;
+        else
+            throw new TypeExpection(extractor + " is not supported by the NERD platform yet. " +
+                    "If you are interested to use this extractor through NERD, please send an " +
+                    "email to giuseppe.rizzo@eurecom.fr\n");
+        
+    }
+
+    protected static String map(ExtractorType extractor) throws TypeExpection 
     {
         switch(extractor) 
         {
@@ -28,10 +69,12 @@ public class LookUp {
             return "evri";
         case EXTRACTIV:
             return "extractiv"; 
-        case ONTOTEXT:
-            return "ontotext";
+        case LUPEDIA:
+            return "lupedia";
+        case NERDE:
+            return "NERDE";            
         case OPENCALAIS:
-            return "opencalais";  
+            return "opencalais";
         case SAPLO:
             return "saplo";
         case WIKIMETA: 

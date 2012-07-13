@@ -46,8 +46,11 @@ public class NERD {
      * @throws TypeExpection 
      *
      */
-    public String extractionJSON(   ExtractorType extractor, String text,
-                                    String language, Boolean duplicate
+    public String extractionJSON(   ExtractorType extractor, 
+                                    String document,
+                                    String type,
+                                    String language, 
+                                    Boolean duplicate
                                  ) 
     throws TypeExpection 
     {
@@ -55,7 +58,8 @@ public class NERD {
         return NERDResult.getExtractionJSON(API_HOST, 
                                             apiKey, 
                                             extractorName, 
-                                            text, 
+                                            document, 
+                                            type,
                                             language, 
                                             duplicate);
     }
@@ -63,8 +67,11 @@ public class NERD {
     /**
     *
     */
-   public List<Extraction> extraction(  ExtractorType extractor, String text,
-                                        String language, Boolean duplicate
+   public List<Extraction> extraction(  ExtractorType extractor, 
+                                        String document,
+                                        String type,
+                                        String language, 
+                                        Boolean duplicate
                                      )
    throws TypeExpection
    {        
@@ -72,7 +79,8 @@ public class NERD {
        return NERDResult.getExtraction(API_HOST, 
                                        apiKey, 
                                        extractorName, 
-                                       text, 
+                                       document, 
+                                       type,
                                        language, 
                                        duplicate);
    }

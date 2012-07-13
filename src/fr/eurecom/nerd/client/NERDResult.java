@@ -33,6 +33,7 @@ public class NERDResult extends Request{
                                     String apiKey,
                                     String extractor,
                                     String text, 
+                                    String type,
                                     String language,
                                     boolean duplicate
                                     ) 
@@ -42,6 +43,7 @@ public class NERDResult extends Request{
         
         params.add("key", apiKey);
         params.add("text", text);
+        params.add("type", type);
         String jsonDocument = 
                     request(uri.concat("document"), RequestType.POST, params);
         Document document = gson.fromJson(jsonDocument, Document.class);
@@ -71,6 +73,7 @@ public class NERDResult extends Request{
                                         String apiKey,
                                         String extractor,
                                         String text, 
+                                        String type,
                                         String language,
                                         boolean duplicate
                                         ) 
@@ -80,6 +83,7 @@ public class NERDResult extends Request{
         
         params.add("key", apiKey);
         params.add("text", text);
+        params.add("type", type);
         String jsonDocument = 
                 request(uri.concat("document"), RequestType.POST, params);
         Document document = gson.fromJson(jsonDocument, Document.class);

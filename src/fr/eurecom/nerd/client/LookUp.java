@@ -1,4 +1,4 @@
-//   nerd4java - A java library which provides an interface to NERD
+//   nerd4java - A java library which provides a programmable interface to NERD
 //               http://nerd.eurecom.fr
 //
 //   Copyright 2012
@@ -14,50 +14,14 @@
 
 package fr.eurecom.nerd.client;
 
+import fr.eurecom.nerd.client.type.ExtractorType;
+import fr.eurecom.nerd.client.type.LanguageType;
+
 public class LookUp {
     
-    public static ExtractorType mapToType(String extractor) throws TypeExpection 
-    {
-        if(extractor.equals("alchemyapi")) 
-            return ExtractorType.ALCHEMYAPI;
-                
-        else if (extractor.equals("spotlight"))
-            return ExtractorType.DBPEDIA_SPOTLIGHT;
-        
-        else if (extractor.equals("evri"))
-            return ExtractorType.EVRI;
-        
-        else if (extractor.equals("extractiv"))
-            return ExtractorType.EXTRACTIV;
+    
 
-        else if (extractor.equals("lupedia"))
-            return ExtractorType.LUPEDIA;
-                
-        else if (extractor.equals("nerde"))
-            return ExtractorType.NERDE;
-                
-        else if (extractor.equals("opencalais"))
-            return ExtractorType.OPENCALAIS;
-        
-        else if (extractor.equals("saplo"))
-            return ExtractorType.SAPLO;        
-        
-        else if (extractor.equals("wikimeta"))
-            return ExtractorType.WIKIMETA;
-        
-        else if(extractor.equals("yahoo"))
-            return ExtractorType.YAHOO;
-        
-        else if(extractor.equals("zemanta"))
-            return ExtractorType.ZEMANTA;
-        else
-            throw new TypeExpection(extractor + " is not supported by the NERD platform yet. " +
-                    "If you are interested to use this extractor through NERD, please send an " +
-                    "email to giuseppe.rizzo@eurecom.fr\n");
-        
-    }
-
-    protected static String map(ExtractorType extractor) throws TypeExpection 
+    protected static String mapExtractor(ExtractorType extractor) 
     {
         switch(extractor) 
         {
@@ -70,24 +34,36 @@ public class LookUp {
         case EXTRACTIV:
             return "extractiv"; 
         case LUPEDIA:
-            return "lupedia";
-        case NERDE:
-            return "NERDE";            
+            return "lupedia";           
         case OPENCALAIS:
             return "opencalais";
         case SAPLO:
             return "saplo";
+        case UEP:
+            return "uep"; 
         case WIKIMETA: 
             return "wikimeta";
         case YAHOO:
             return "yahoo";
         case ZEMANTA:
             return "zemanta";
-        default:
-            throw new TypeExpection(extractor + " is not supported by the NERD platform yet. " +
-            		"If you are interested to use this extractor through NERD, please send an " +
-            		"email to giuseppe.rizzo@eurecom.fr\n");
         }
-        
+        return null;
     }
+
+    public static String mapLanguage(LanguageType langType) 
+    {
+        switch(langType) 
+        {
+        case ENGLISH: 
+            return "en";
+        case FRENCH:
+            return "fr";
+        case DUTCH:
+            return "du";
+        }
+        return null;
+    }
+
+
 }

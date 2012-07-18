@@ -1,4 +1,4 @@
-//   nerd4java - A java library which provides an interface to NERD
+//   nerd4java - A java library which provides a programmable interface to NERD
 //               http://nerd.eurecom.fr
 //
 //   Copyright 2012
@@ -17,6 +17,9 @@ package fr.eurecom.nerd.client;
 import java.util.List;
 
 import fr.eurecom.nerd.client.schema.Extraction;
+import fr.eurecom.nerd.client.type.DocumentType;
+import fr.eurecom.nerd.client.type.ExtractorType;
+import fr.eurecom.nerd.client.type.LanguageType;
 
 public class NERD {
     
@@ -43,45 +46,49 @@ public class NERD {
     }
     
     /**
-     * @throws TypeExpection 
+     *  Get JSON 
      *
      */
-    public String extractionJSON(   ExtractorType extractor, 
+    public String extractionJSON(   ExtractorType extType, 
+                                    DocumentType docuType,
+                                    LanguageType langType, 
                                     String document,
-                                    String type,
-                                    String language, 
                                     Boolean duplicate
                                  ) 
     throws TypeExpection 
     {
-        String extractorName = LookUp.map(extractor);
+        String extractor = LookUp.mapExtractor(extType);
+        String language = LookUp.mapLanguage(langType);
+        
         return NERDResult.getExtractionJSON(API_HOST, 
                                             apiKey, 
-                                            extractorName, 
-                                            document, 
-                                            type,
+                                            extractor, 
+                                            docuType,
                                             language, 
+                                            document, 
                                             duplicate);
     }
 
     /**
-    *
+    *   Get collection of Extraction objects
     */
-   public List<Extraction> extraction(  ExtractorType extractor, 
+   public List<Extraction> extraction(  ExtractorType extType, 
+                                        DocumentType docuType,
+                                        LanguageType langType, 
                                         String document,
-                                        String type,
-                                        String language, 
                                         Boolean duplicate
                                      )
    throws TypeExpection
    {        
-       String extractorName = LookUp.map(extractor);
+       String extractor = LookUp.mapExtractor(extType);
+       String language = LookUp.mapLanguage(langType);
+       
        return NERDResult.getExtraction(API_HOST, 
                                        apiKey, 
-                                       extractorName, 
-                                       document, 
-                                       type,
+                                       extractor, 
+                                       docuType,
                                        language, 
+                                       document, 
                                        duplicate);
    }
 

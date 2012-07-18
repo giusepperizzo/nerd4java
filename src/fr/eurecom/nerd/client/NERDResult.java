@@ -1,4 +1,4 @@
-//   nerd4java - A java library which provides an interface to NERD
+//   nerd4java - A java library which provides a programmable interface to NERD
 //               http://nerd.eurecom.fr
 //
 //   Copyright 2012
@@ -11,6 +11,7 @@
 // the Free Software Foundation, either version 3 of the License, or (at 
 // your option) any later version. See the file Documentation/GPL3 in the
 // original distribution for details. There is ABSOLUTELY NO warranty.
+
 
 package fr.eurecom.nerd.client;
 
@@ -25,25 +26,30 @@ import com.sun.jersey.core.util.MultivaluedMapImpl;
 
 import fr.eurecom.nerd.client.schema.Document;
 import fr.eurecom.nerd.client.schema.Extraction;
+import fr.eurecom.nerd.client.type.DocumentType;
 
 public class NERDResult extends Request{
     
     protected static String getExtractionJSON(
-                                    String uri,
-                                    String apiKey,
-                                    String extractor,
-                                    String text, 
-                                    String type,
-                                    String language,
-                                    boolean duplicate
-                                    ) 
+                                                String uri,
+                                                String apiKey,
+                                                String extractor,
+                                                DocumentType docuType,
+                                                String language,
+                                                String text, 
+                                                boolean duplicate
+                                              ) 
     {
         Gson gson = new Gson();
         MultivaluedMap<String,String> params =  new MultivaluedMapImpl();
         
         params.add("key", apiKey);
-        params.add("text", text);
-        params.add("type", type);
+        
+        switch (docuType) {
+        case PLAINTEXT: params.add("text", text);       break;
+        case TIMEDTEXT: params.add("timedtext", text);  break;
+        }
+        
         String jsonDocument = 
                     request(uri.concat("document"), RequestType.POST, params);
         Document document = gson.fromJson(jsonDocument, Document.class);
@@ -69,21 +75,23 @@ public class NERDResult extends Request{
     }
     
     protected static List<Extraction> getExtraction(
-                                        String uri,
-                                        String apiKey,
-                                        String extractor,
-                                        String text, 
-                                        String type,
-                                        String language,
-                                        boolean duplicate
-                                        ) 
+                                                    String uri,
+                                                    String apiKey,
+                                                    String extractor,
+                                                    DocumentType docuType,
+                                                    String language,
+                                                    String text, 
+                                                    boolean duplicate
+                                                   ) 
     {
         Gson gson = new Gson();
         MultivaluedMap<String,String> params =  new MultivaluedMapImpl();
         
         params.add("key", apiKey);
-        params.add("text", text);
-        params.add("type", type);
+        switch (docuType) {
+        case PLAINTEXT: params.add("text", text);       break;
+        case TIMEDTEXT: params.add("timedtext", text);  break;
+        }
         String jsonDocument = 
                 request(uri.concat("document"), RequestType.POST, params);
         Document document = gson.fromJson(jsonDocument, Document.class);

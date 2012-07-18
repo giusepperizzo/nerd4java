@@ -1,4 +1,4 @@
-//   nerd4java - A java library which provides an interface to NERD
+//   nerd4java - A java library which provides a programmable interface to NERD
 //               http://nerd.eurecom.fr
 //
 //   Copyright 2012

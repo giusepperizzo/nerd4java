@@ -28,18 +28,57 @@ public class Extraction {
     private Double confidence;
     private Double relevance;
     private String source;
+    private Double startNPT;
+    private Double endNPT;
+    
+    public Extraction(int idExtraction, String entity, String type,
+            String uri, String nerdType, Integer startChar,
+            Integer endChar, double confidence, double relevance,
+            String source, Double startNpt, Double endNpt) 
+    {
+        this(entity,type,uri,nerdType,startChar,endChar,confidence,relevance,
+                source,startNpt,endNpt);
+        this.setIdExtraction(idExtraction);
+    }
+
     
     public Extraction ( String entity, 
-                        Integer startChar, 
-                        Integer endChar, 
                         String type, 
-                        String source )
+                        String uri, 
+                        String nerdtype, 
+                        Double confidence,
+                        String source)
     {
-        this.entity = entity;
-        this.startChar = startChar;
-        this.endChar = endChar;
-        this.type = type;
-        this.source = source;
+        this.setEntity(entity);
+        this.setType(type);
+        this.setUri(uri);
+        this.setNerdType(nerdtype);
+        this.setConfidence(confidence);
+        this.setSource(source);
+    }
+
+    public Extraction( 
+                       String entity, String type, String uri, String nerdType, 
+                       Integer startchar, Integer endchar, Double confidence, String source
+                      ) 
+    {
+        this(entity,type,uri,nerdType,confidence, source); 
+        this.setStartChar(startchar);
+        this.setEndChar(endchar);
+    }
+
+
+    public Extraction(  String entity, String type, String uri, String nerdType, 
+                        Integer startChar, Integer endChar, Double confidence,
+                        Double relevance, String source,
+                        Double startNPT, Double endNPT) 
+    {
+        this(entity,type,uri,nerdType, confidence, source); 
+        this.setStartChar(startChar);
+        this.setEndChar(endChar);
+        this.setStartNPT(startNPT);
+        this.setEndNPT(endNPT);
+        this.setRelevance(relevance);
     }
     
     public Integer getStartChar() {
@@ -102,6 +141,22 @@ public class Extraction {
     }
     public void setSource(String source) {
         this.source = source;
+    }
+
+    public Double getStartNPT() {
+        return startNPT;
+    }
+
+    public void setStartNPT(Double startNPT) {
+        this.startNPT = startNPT;
+    }
+
+    public Double getEndNPT() {
+        return endNPT;
+    }
+
+    public void setEndNPT(Double endNPT) {
+        this.endNPT = endNPT;
     }
 
     public static final Comparator<Extraction> ENTITYPOSITION = 

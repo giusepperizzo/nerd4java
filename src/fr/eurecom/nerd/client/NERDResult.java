@@ -66,6 +66,10 @@ public class NERDResult extends Request{
         // read extraction from annotation
         params.remove("idDocument");
         params.remove("language");
+        switch (docuType) {
+        case PLAINTEXT: params.remove("text");       break;
+        case TIMEDTEXT: params.remove("timedtext");  break;
+        }
         params.add("duplicate", (duplicate)?"true":"false");
         jsonExtraction = 
                 request(uri.concat("extraction/").concat(extraction.getIdExtraction().toString()), 
@@ -108,7 +112,10 @@ public class NERDResult extends Request{
         // read extraction from annotation
         params.remove("idDocument");
         params.remove("language");
-        params.add("idExtraction", extraction.getIdExtraction().toString());
+        switch (docuType) {
+        case PLAINTEXT: params.remove("text");       break;
+        case TIMEDTEXT: params.remove("timedtext");  break;
+        }
         params.add("duplicate", (duplicate)?"true":"false");
         jsonExtraction = 
                 request(uri.concat("extraction/").concat(extraction.getIdExtraction().toString()), 

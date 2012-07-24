@@ -16,7 +16,6 @@ package fr.eurecom.nerd.client.type;
 
 public enum ExtractorType {
     ALCHEMYAPI,
-    //COMBINED,
     DBPEDIA_SPOTLIGHT,
     EVRI,
     EXTRACTIV,
@@ -26,5 +25,6 @@ public enum ExtractorType {
     UEP,
     WIKIMETA,
     YAHOO,
-    ZEMANTA    
+    ZEMANTA,
+    COMBINED
 }

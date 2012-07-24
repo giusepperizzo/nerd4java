@@ -47,6 +47,8 @@ public class LookUp {
             return "yahoo";
         case ZEMANTA:
             return "zemanta";
+        case COMBINED:
+            return "combined";
         }
         return null;
     }

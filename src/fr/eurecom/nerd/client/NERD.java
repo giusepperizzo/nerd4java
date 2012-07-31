@@ -65,10 +65,64 @@ public class NERD {
                                             extractor, 
                                             docuType,
                                             language, 
-                                            document, 
+                                            document,
+                                            null,
+                                            duplicate);
+    }
+    
+    /**
+     *  Get JSON 
+     *
+     */
+    public String extractionJSON(   ExtractorType extType, 
+                                    DocumentType docuType,
+                                    LanguageType langType, 
+                                    String document,
+                                    Long timeout,
+                                    Boolean duplicate
+                                 ) 
+    throws TypeExpection 
+    {
+        String extractor = LookUp.mapExtractor(extType);
+        String language = LookUp.mapLanguage(langType);
+        
+        return NERDResult.getExtractionJSON(API_HOST, 
+                                            apiKey, 
+                                            extractor, 
+                                            docuType,
+                                            language, 
+                                            document,
+                                            timeout,
                                             duplicate);
     }
 
+
+    /**
+     *   Get collection of Extraction objects
+     */
+    public List<Extraction> extraction(  ExtractorType extType, 
+                                         DocumentType docuType,
+                                         LanguageType langType, 
+                                         String document,
+                                         Long timeout,
+                                         Boolean duplicate
+                                      )
+    throws TypeExpection
+    {        
+        String extractor = LookUp.mapExtractor(extType);
+        String language = LookUp.mapLanguage(langType);
+        
+        return NERDResult.getExtraction(API_HOST, 
+                                        apiKey, 
+                                        extractor, 
+                                        docuType,
+                                        language, 
+                                        document, 
+                                        timeout,
+                                        duplicate);
+    }
+
+    
     /**
     *   Get collection of Extraction objects
     */
@@ -88,7 +142,8 @@ public class NERD {
                                        extractor, 
                                        docuType,
                                        language, 
-                                       document, 
+                                       document,
+                                       null,
                                        duplicate);
    }
 

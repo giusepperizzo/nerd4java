@@ -29,7 +29,7 @@ import fr.eurecom.nerd.client.schema.Document;
 import fr.eurecom.nerd.client.schema.Extraction;
 import fr.eurecom.nerd.client.type.DocumentType;
 
-public class NERDResult extends Request{
+public class NERDResult extends Request{ 
     
     protected static String getExtractionJSON(
                                                 String uri,
@@ -58,7 +58,7 @@ public class NERDResult extends Request{
         params.clear();
         params.add("key", apiKey);
         params.add("extractor", extractor);
-        params.add("idDocument", document.getIdDocument());
+        params.add("idDocument", document.getIdDocument().toString());
         params.add("language", language);
         if(timeout!=null) params.add("timeout", timeout.toString());
         String jsonAnnotation = request(uri.concat("annotation"), RequestType.POST, params);
@@ -101,7 +101,7 @@ public class NERDResult extends Request{
         params.clear();
         params.add("key", apiKey);
         params.add("extractor", extractor);
-        params.add("idDocument", document.getIdDocument());
+        params.add("idDocument", document.getIdDocument().toString());
         params.add("language", language);
         if(timeout!=null) params.add("timeout", timeout.toString());
         String jsonAnnotation = request(uri.concat("annotation"), RequestType.POST, params);

@@ -16,7 +16,7 @@
 package fr.eurecom.nerd.client.schema;
 
 public class Document {
-    private String idDocument;
+    private Integer idDocument;
     private String text;
     public String getText() {
         return text;
@@ -24,10 +24,10 @@ public class Document {
     public void setText(String text) {
         this.text = text;
     }
-    public String getIdDocument() {
+    public Integer getIdDocument() {
         return idDocument;
     }
-    public void setIdDocument(String idDocument) {
+    public void setIdDocument(Integer idDocument) {
         this.idDocument = idDocument;
     }
 

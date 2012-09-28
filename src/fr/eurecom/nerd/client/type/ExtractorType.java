@@ -22,7 +22,7 @@ public enum ExtractorType {
     LUPEDIA,
     OPENCALAIS,
     SAPLO,
-    UEP,
+    SEMITAGS,
     WIKIMETA,
     YAHOO,
     ZEMANTA,

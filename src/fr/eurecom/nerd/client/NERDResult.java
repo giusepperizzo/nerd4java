@@ -28,18 +28,82 @@ import fr.eurecom.nerd.client.schema.Annotation;
 import fr.eurecom.nerd.client.schema.Document;
 import fr.eurecom.nerd.client.schema.Extraction;
 import fr.eurecom.nerd.client.type.DocumentType;
+import fr.eurecom.nerd.client.type.ExtractorType;
 
-public class NERDResult extends Request{ 
+public class NERDResult extends Request{
+        
+    /*
+     *  post object and get its id
+     */
+    protected static Integer postDocument  (   String uri, 
+                                               String apiKey,
+                                               DocumentType docuType,
+                                               String text ) 
+    {
+        Gson gson = new Gson();
+        MultivaluedMap<String,String> params =  new MultivaluedMapImpl();
+        
+        params.add("key", apiKey);        
+        switch (docuType) {
+        case PLAINTEXT: params.add("text", text);       break;
+        case TIMEDTEXT: params.add("timedtext", text);  break;
+        }        
+        String jsonDocument = 
+                    request(uri.concat("document"), RequestType.POST, params);
+        Document document = gson.fromJson(jsonDocument, Document.class);
+        return document.getIdDocument();
+    }
     
+    protected static Integer postAnnotation ( String uri,
+                                              String apiKey,
+                                              ExtractorType extType, 
+                                              Long timeout,
+                                              Integer idDocument )
+    {
+        Gson gson = new Gson();
+        MultivaluedMap<String,String> params =  new MultivaluedMapImpl();
+        String extractor = LookUp.mapExtractor(extType);
+        
+        params.add("key", apiKey);
+        params.add("extractor", extractor);
+        params.add("idDocument", idDocument.toString());
+        if(timeout!=null) params.add("timeout", timeout.toString());
+        String jsonAnnotation = request(uri.concat("annotation"), RequestType.POST, params);
+        Annotation annotation = gson.fromJson(jsonAnnotation, Annotation.class);
+        
+        return annotation.getIdAnnotation();
+    }
+    
+    protected static String getExtractions( String uri,
+                                            String apiKey,
+                                            Integer idAnnotation,
+                                            String granularity)
+    {
+        MultivaluedMap<String,String> params =  new MultivaluedMapImpl();
+        
+        // read extraction from annotation
+        params.add("key", apiKey);
+        params.add("idAnnotation", idAnnotation.toString());
+        params.add("granularity", granularity);
+        String jsonExtraction = request(uri.concat("extraction"), RequestType.GET, params);
+        
+        return jsonExtraction;
+    }
+    
+    
+    /*
+     *  Abstraction methods to get the extraction results:
+     *  - JSON
+     *  - List<Extraction>
+     */
     protected static String getExtractionJSON(
                                                 String uri,
                                                 String apiKey,
                                                 String extractor,
                                                 DocumentType docuType,
-                                                String language,
                                                 String text, 
-                                                Long timeout,
-                                                boolean duplicate
+                                                String granularity,
+                                                Long timeout
                                               ) 
     {
         Gson gson = new Gson();
@@ -59,7 +123,6 @@ public class NERDResult extends Request{
         params.add("key", apiKey);
         params.add("extractor", extractor);
         params.add("idDocument", document.getIdDocument().toString());
-        params.add("language", language);
         if(timeout!=null) params.add("timeout", timeout.toString());
         String jsonAnnotation = request(uri.concat("annotation"), RequestType.POST, params);
         Annotation annotation = gson.fromJson(jsonAnnotation, Annotation.class);
@@ -68,10 +131,10 @@ public class NERDResult extends Request{
         params.clear();
         params.add("key", apiKey);
         params.add("idAnnotation", annotation.getIdAnnotation().toString());
-        params.add("duplicate", (duplicate)?"true":"false");
-        String jsonExtraction = request(uri.concat("extraction"), RequestType.GET, params);
+        if(granularity!=null) params.add("granularity", granularity );
+        String json = request(uri.concat("extraction"), RequestType.GET, params);
         
-        return jsonExtraction;
+        return json;
     }
     
     protected static List<Extraction> getExtraction(
@@ -79,43 +142,17 @@ public class NERDResult extends Request{
                                                     String apiKey,
                                                     String extractor,
                                                     DocumentType docuType,
-                                                    String language,
                                                     String text, 
-                                                    Long timeout,
-                                                    boolean duplicate
+                                                    String granularity,
+                                                    Long timeout
                                                    ) 
     {
         Gson gson = new Gson();
-        MultivaluedMap<String,String> params =  new MultivaluedMapImpl();
         
-        params.add("key", apiKey);
-        switch (docuType) {
-        case PLAINTEXT: params.add("text", text);       break;
-        case TIMEDTEXT: params.add("timedtext", text);  break;
-        }
-        String jsonDocument = 
-                request(uri.concat("document"), RequestType.POST, params);
-        Document document = gson.fromJson(jsonDocument, Document.class);
-        
-        // create annotation
-        params.clear();
-        params.add("key", apiKey);
-        params.add("extractor", extractor);
-        params.add("idDocument", document.getIdDocument().toString());
-        params.add("language", language);
-        if(timeout!=null) params.add("timeout", timeout.toString());
-        String jsonAnnotation = request(uri.concat("annotation"), RequestType.POST, params);
-        Annotation annotation = gson.fromJson(jsonAnnotation, Annotation.class);
-        
-        // read extraction from annotation
-        params.clear();        
-        params.add("key", apiKey);
-        params.add("idAnnotation", annotation.getIdAnnotation().toString());
-        params.add("duplicate", (duplicate)?"true":"false");
-        String jsonExtraction = request(uri.concat("extraction"), RequestType.GET, params);
+        String json = getExtractionJSON(uri, apiKey, extractor, docuType, text, granularity, timeout);
         
         Type listType = new TypeToken<List<Extraction>>(){}.getType();
-        List<Extraction> extractions = gson.fromJson(jsonExtraction, listType);
+        List<Extraction> extractions = gson.fromJson(json, listType);
                 
         return extractions;
     }

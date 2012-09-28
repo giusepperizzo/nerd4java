@@ -19,7 +19,7 @@ import java.util.List;
 import fr.eurecom.nerd.client.schema.Extraction;
 import fr.eurecom.nerd.client.type.DocumentType;
 import fr.eurecom.nerd.client.type.ExtractorType;
-import fr.eurecom.nerd.client.type.LanguageType;
+import fr.eurecom.nerd.client.type.GranularityType;
 
 public class NERD {
     
@@ -44,56 +44,48 @@ public class NERD {
         this.API_HOST = host;
         this.apiKey = apiKey;
     }
-    
+        
     /**
      *  Get JSON 
      *
      */
     public String extractionJSON(   ExtractorType extType, 
                                     DocumentType docuType,
-                                    LanguageType langType, 
-                                    String document,
-                                    Boolean duplicate
-                                 ) 
+                                    String document
+         ) 
     throws TypeExpection 
-    {
-        String extractor = LookUp.mapExtractor(extType);
-        String language = LookUp.mapLanguage(langType);
-        
-        return NERDResult.getExtractionJSON(API_HOST, 
-                                            apiKey, 
-                                            extractor, 
-                                            docuType,
-                                            language, 
-                                            document,
-                                            null,
-                                            duplicate);
+    {        
+        return extractionJSON(extType, docuType, document, GranularityType.OEN, null);
     }
     
-    /**
-     *  Get JSON 
-     *
-     */
     public String extractionJSON(   ExtractorType extType, 
                                     DocumentType docuType,
-                                    LanguageType langType, 
                                     String document,
-                                    Long timeout,
-                                    Boolean duplicate
+                                    GranularityType granType
+                                 ) 
+    throws TypeExpection 
+    {
+        return extractionJSON(extType, docuType, document, granType, null);
+    }
+
+    public String extractionJSON(   ExtractorType extType, 
+                                    DocumentType docuType,
+                                    String document,
+                                    GranularityType granType,
+                                    Long timeout
                                  ) 
     throws TypeExpection 
     {
         String extractor = LookUp.mapExtractor(extType);
-        String language = LookUp.mapLanguage(langType);
+        String granularity = LookUp.mapGranularity(granType);
         
         return NERDResult.getExtractionJSON(API_HOST, 
                                             apiKey, 
                                             extractor, 
                                             docuType,
-                                            language, 
                                             document,
-                                            timeout,
-                                            duplicate);
+                                            granularity,
+                                            timeout);
     }
 
 
@@ -102,49 +94,41 @@ public class NERD {
      */
     public List<Extraction> extraction(  ExtractorType extType, 
                                          DocumentType docuType,
-                                         LanguageType langType, 
-                                         String document,
-                                         Long timeout,
-                                         Boolean duplicate
+                                         String document
                                       )
     throws TypeExpection
-    {        
-        String extractor = LookUp.mapExtractor(extType);
-        String language = LookUp.mapLanguage(langType);
-        
-        return NERDResult.getExtraction(API_HOST, 
-                                        apiKey, 
-                                        extractor, 
-                                        docuType,
-                                        language, 
-                                        document, 
-                                        timeout,
-                                        duplicate);
+    {                
+        return extraction(extType, docuType, document, GranularityType.OEN, null);
+    }
+    
+    public List<Extraction> extraction(  ExtractorType extType, 
+                                         DocumentType docuType,
+                                         String document,
+                                         GranularityType granType
+                                      )
+    throws TypeExpection
+    {   
+        return extraction(extType, docuType, document, granType, null);
     }
 
-    
-    /**
-    *   Get collection of Extraction objects
-    */
-   public List<Extraction> extraction(  ExtractorType extType, 
-                                        DocumentType docuType,
-                                        LanguageType langType, 
-                                        String document,
-                                        Boolean duplicate
-                                     )
+   public List<Extraction> extraction(   ExtractorType extType, 
+                                         DocumentType docuType,
+                                         String document,
+                                         GranularityType granType,
+                                         Long timeout
+                                     ) 
    throws TypeExpection
    {        
        String extractor = LookUp.mapExtractor(extType);
-       String language = LookUp.mapLanguage(langType);
+       String granularity = LookUp.mapGranularity(granType);
        
        return NERDResult.getExtraction(API_HOST, 
                                        apiKey, 
                                        extractor, 
                                        docuType,
-                                       language, 
                                        document,
-                                       null,
-                                       duplicate);
+                                       granularity, 
+                                       timeout);
    }
 
 }

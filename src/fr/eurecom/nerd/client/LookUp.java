@@ -15,7 +15,7 @@
 package fr.eurecom.nerd.client;
 
 import fr.eurecom.nerd.client.type.ExtractorType;
-import fr.eurecom.nerd.client.type.LanguageType;
+import fr.eurecom.nerd.client.type.GranularityType;
 
 public class LookUp {
     
@@ -28,7 +28,7 @@ public class LookUp {
         case ALCHEMYAPI: 
             return "alchemyapi";
         case DBPEDIA_SPOTLIGHT:
-            return "spotlight";
+            return "dbspotlight";
         case EVRI:
             return "evri";
         case EXTRACTIV:
@@ -39,8 +39,8 @@ public class LookUp {
             return "opencalais";
         case SAPLO:
             return "saplo";
-        case UEP:
-            return "uep"; 
+        case SEMITAGS:
+            return "semitags"; 
         case WIKIMETA: 
             return "wikimeta";
         case YAHOO:
@@ -53,19 +53,15 @@ public class LookUp {
         return null;
     }
 
-    public static String mapLanguage(LanguageType langType) 
-    {
-        switch(langType) 
+    public static String mapGranularity(GranularityType granType) 
+    {       
+        switch(granType)
         {
-        case ENGLISH: 
-            return "en";
-        case FRENCH:
-            return "fr";
-        case DUTCH:
-            return "du";
+        case OEN:
+            return "oen";
+        case OED:
+            return "oed";
         }
         return null;
     }
-
-
 }

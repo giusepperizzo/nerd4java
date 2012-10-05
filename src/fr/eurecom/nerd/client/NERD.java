@@ -52,8 +52,7 @@ public class NERD {
     public String extractionJSON(   ExtractorType extType, 
                                     DocumentType docuType,
                                     String document
-         ) 
-    throws TypeExpection 
+                                ) 
     {        
         return extractionJSON(extType, docuType, document, GranularityType.OEN, null);
     }
@@ -63,7 +62,6 @@ public class NERD {
                                     String document,
                                     GranularityType granType
                                  ) 
-    throws TypeExpection 
     {
         return extractionJSON(extType, docuType, document, granType, null);
     }
@@ -74,7 +72,6 @@ public class NERD {
                                     GranularityType granType,
                                     Long timeout
                                  ) 
-    throws TypeExpection 
     {
         String extractor = LookUp.mapExtractor(extType);
         String granularity = LookUp.mapGranularity(granType);
@@ -96,7 +93,6 @@ public class NERD {
                                          DocumentType docuType,
                                          String document
                                       )
-    throws TypeExpection
     {                
         return extraction(extType, docuType, document, GranularityType.OEN, null);
     }
@@ -106,7 +102,6 @@ public class NERD {
                                          String document,
                                          GranularityType granType
                                       )
-    throws TypeExpection
     {   
         return extraction(extType, docuType, document, granType, null);
     }
@@ -117,7 +112,6 @@ public class NERD {
                                          GranularityType granType,
                                          Long timeout
                                      ) 
-   throws TypeExpection
    {        
        String extractor = LookUp.mapExtractor(extType);
        String granularity = LookUp.mapGranularity(granType);

@@ -26,7 +26,7 @@ import com.sun.jersey.core.util.MultivaluedMapImpl;
 
 import fr.eurecom.nerd.client.schema.Annotation;
 import fr.eurecom.nerd.client.schema.Document;
-import fr.eurecom.nerd.client.schema.Extraction;
+import fr.eurecom.nerd.client.schema.Entity;
 import fr.eurecom.nerd.client.type.DocumentType;
 import fr.eurecom.nerd.client.type.ExtractorType;
 
@@ -85,7 +85,7 @@ public class NERDResult extends Request{
         params.add("key", apiKey);
         params.add("idAnnotation", idAnnotation.toString());
         params.add("granularity", granularity);
-        String jsonExtraction = request(uri.concat("extraction"), RequestType.GET, params);
+        String jsonExtraction = request(uri.concat("entity"), RequestType.GET, params);
         
         return jsonExtraction;
     }
@@ -96,7 +96,7 @@ public class NERDResult extends Request{
      *  - JSON
      *  - List<Extraction>
      */
-    protected static String getExtractionJSON(
+    protected static String doAnnotationJSON(
                                                 String uri,
                                                 String apiKey,
                                                 String extractor,
@@ -104,7 +104,7 @@ public class NERDResult extends Request{
                                                 String text, 
                                                 String granularity,
                                                 Long timeout
-                                              ) 
+                                             ) 
     {
         Gson gson = new Gson();
         MultivaluedMap<String,String> params =  new MultivaluedMapImpl();
@@ -132,12 +132,12 @@ public class NERDResult extends Request{
         params.add("key", apiKey);
         params.add("idAnnotation", annotation.getIdAnnotation().toString());
         if(granularity!=null) params.add("granularity", granularity );
-        String json = request(uri.concat("extraction"), RequestType.GET, params);
+        String json = request(uri.concat("entity"), RequestType.GET, params);
         
         return json;
     }
     
-    protected static List<Extraction> getExtraction(
+    protected static List<Entity> doAnnotation(
                                                     String uri,
                                                     String apiKey,
                                                     String extractor,
@@ -145,15 +145,15 @@ public class NERDResult extends Request{
                                                     String text, 
                                                     String granularity,
                                                     Long timeout
-                                                   ) 
+                                                ) 
     {
         Gson gson = new Gson();
         
-        String json = getExtractionJSON(uri, apiKey, extractor, docuType, text, granularity, timeout);
+        String json = doAnnotationJSON(uri, apiKey, extractor, docuType, text, granularity, timeout);
         
-        Type listType = new TypeToken<List<Extraction>>(){}.getType();
-        List<Extraction> extractions = gson.fromJson(json, listType);
+        Type listType = new TypeToken<List<Entity>>(){}.getType();
+        List<Entity> entities = gson.fromJson(json, listType);
                 
-        return extractions;
+        return entities;
     }
 }

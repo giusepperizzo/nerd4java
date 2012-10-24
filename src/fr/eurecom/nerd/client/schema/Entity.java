@@ -12,68 +12,71 @@
 // your option) any later version. See the file Documentation/GPL3 in the
 // original distribution for details. There is ABSOLUTELY NO warranty.
 
-
 package fr.eurecom.nerd.client.schema;
 
 import java.util.Comparator;
 
-public class Extraction {
-    private Integer idExtraction;
-    private String entity;
+public class Entity {
+    private Integer idEntity;
+    private String label;
     private Integer startChar;
     private Integer endChar;
-    private String type;
+    private String extractorType;
     private String nerdType;
     private String uri;
     private Double confidence;
     private Double relevance;
-    private String source;
+    private String extractor;
     private Double startNPT;
     private Double endNPT;
     
-    public Extraction(int idExtraction, String entity, String type,
+    public Entity(int idEntity, String label, String type,
             String uri, String nerdType, Integer startChar,
             Integer endChar, double confidence, double relevance,
             String source, Double startNpt, Double endNpt) 
     {
-        this(entity,type,uri,nerdType,startChar,endChar,confidence,relevance,
+        this(label,type,uri,nerdType,startChar,endChar,confidence,relevance,
                 source,startNpt,endNpt);
-        this.setIdExtraction(idExtraction);
+        this.setIdEntity(idEntity);
     }
 
     
-    public Extraction ( String entity, 
-                        String type, 
-                        String uri, 
-                        String nerdtype, 
-                        Double confidence,
-                        String source)
+    public Entity (     
+                    String label, 
+                    String type, 
+                    String uri, 
+                    String nerdtype, 
+                    Double confidence,
+                    String source
+                  )
     {
-        this.setEntity(entity);
-        this.setType(type);
+        this.setLabel(label);
+        this.setExtractorType(type);
         this.setUri(uri);
         this.setNerdType(nerdtype);
         this.setConfidence(confidence);
-        this.setSource(source);
+        this.setExtractor(source);
     }
 
-    public Extraction( 
-                       String entity, String type, String uri, String nerdType, 
-                       Integer startchar, Integer endchar, Double confidence, String source
-                      ) 
+    public Entity( 
+                   String label, String type, String uri, String nerdType, 
+                   Integer startchar, Integer endchar, Double confidence, String source
+                  ) 
     {
-        this(entity,type,uri,nerdType,confidence, source); 
+        this(label,type,uri,nerdType,confidence, source); 
         this.setStartChar(startchar);
         this.setEndChar(endchar);
     }
 
 
-    public Extraction(  String entity, String type, String uri, String nerdType, 
-                        Integer startChar, Integer endChar, Double confidence,
-                        Double relevance, String source,
-                        Double startNPT, Double endNPT) 
+    public Entity(
+                    String label, String type, String uri, String nerdType, 
+                    Integer startChar, Integer endChar, Double confidence,
+                    Double relevance, String source,
+                    Double startNPT, Double endNPT
+                 ) 
     {
-        this(entity,type,uri,nerdType, confidence, source); 
+        this(label, type,  uri, nerdType, confidence, source); 
         this.setStartChar(startChar);
         this.setEndChar(endChar);
         this.setStartNPT(startNPT);
@@ -87,23 +90,23 @@ public class Extraction {
     public void setStartChar(Integer startChar) {
         this.startChar = startChar;
     }
-    public Integer getIdExtraction() {
-        return idExtraction;
+    public Integer getIdEntity() {
+        return idEntity;
     }
-    public void setIdExtraction(Integer idExtraction) {
-        this.idExtraction = idExtraction;
+    public void setIdEntity(Integer idEntity) {
+        this.idEntity = idEntity;
     }
-    public String getEntity() {
-        return entity;
+    public String getLabel() {
+        return label;
     }
-    public void setEntity(String entity) {
-        this.entity = entity;
+    public void setLabel(String label) {
+        this.label = label;
     }
-    public String getType() {
-        return type;
+    public String getExtractorType() {
+        return extractorType;
     }
-    public void setType(String type) {
-        this.type = type;
+    public void setExtractorType(String extractorType) {
+        this.extractorType = extractorType;
     }
     public Integer getEndChar() {
         return endChar;
@@ -136,11 +139,11 @@ public class Extraction {
         this.relevance = relevance;
     }
     
-    public String getSource() {
-        return source;
+    public String getExtractor() {
+        return extractor;
     }
-    public void setSource(String source) {
-        this.source = source;
+    public void setExtractor(String extractor) {
+        this.extractor = extractor;
     }
 
     public Double getStartNPT() {
@@ -159,9 +162,9 @@ public class Extraction {
         this.endNPT = endNPT;
     }
 
-    public static final Comparator<Extraction> ENTITYPOSITION = 
-            new Comparator<Extraction>() {
-                public int compare(Extraction e1, Extraction e2) {  
+    public static final Comparator<Entity> ENTITYPOSITION = 
+            new Comparator<Entity>() {
+                public int compare(Entity e1, Entity e2) {  
                     int position = e1.getStartChar().compareTo(e2.getStartChar());
                     if(position == 0) 
                         position = e2.getEndChar().compareTo(e1.getEndChar());

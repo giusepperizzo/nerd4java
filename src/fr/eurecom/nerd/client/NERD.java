@@ -16,7 +16,7 @@ package fr.eurecom.nerd.client;
 
 import java.util.List;
 
-import fr.eurecom.nerd.client.schema.Extraction;
+import fr.eurecom.nerd.client.schema.Entity;
 import fr.eurecom.nerd.client.type.DocumentType;
 import fr.eurecom.nerd.client.type.ExtractorType;
 import fr.eurecom.nerd.client.type.GranularityType;
@@ -49,34 +49,37 @@ public class NERD {
      *  Get JSON 
      *
      */
-    public String extractionJSON(   ExtractorType extType, 
-                                    DocumentType docuType,
-                                    String document
-                                ) 
+    public String annotateJSON(
+                                ExtractorType extType, 
+                                DocumentType docuType,
+                                String document
+                              ) 
     {        
-        return extractionJSON(extType, docuType, document, GranularityType.OEN, null);
+        return annotateJSON(extType, docuType, document, GranularityType.OEN, null);
     }
     
-    public String extractionJSON(   ExtractorType extType, 
-                                    DocumentType docuType,
-                                    String document,
-                                    GranularityType granType
-                                 ) 
+    public String annotateJSON(
+                                ExtractorType extType, 
+                                DocumentType docuType,
+                                String document,
+                                GranularityType granType
+                               ) 
     {
-        return extractionJSON(extType, docuType, document, granType, null);
+        return annotateJSON(extType, docuType, document, granType, null);
     }
 
-    public String extractionJSON(   ExtractorType extType, 
-                                    DocumentType docuType,
-                                    String document,
-                                    GranularityType granType,
-                                    Long timeout
-                                 ) 
+    public String annotateJSON(
+                                ExtractorType extType, 
+                                DocumentType docuType,
+                                String document,
+                                GranularityType granType,
+                                Long timeout
+                                ) 
     {
         String extractor = LookUp.mapExtractor(extType);
         String granularity = LookUp.mapGranularity(granType);
         
-        return NERDResult.getExtractionJSON(API_HOST, 
+        return NERDResult.doAnnotationJSON( API_HOST, 
                                             apiKey, 
                                             extractor, 
                                             docuType,
@@ -89,34 +92,37 @@ public class NERD {
     /**
      *   Get collection of Extraction objects
      */
-    public List<Extraction> extraction(  ExtractorType extType, 
-                                         DocumentType docuType,
-                                         String document
-                                      )
+    public List<Entity> annotate(
+                                    ExtractorType extType, 
+                                    DocumentType docuType,
+                                    String document
+                                )
     {                
-        return extraction(extType, docuType, document, GranularityType.OEN, null);
+        return annotate(extType, docuType, document, GranularityType.OEN, null);
     }
     
-    public List<Extraction> extraction(  ExtractorType extType, 
-                                         DocumentType docuType,
-                                         String document,
-                                         GranularityType granType
-                                      )
+    public List<Entity> annotate(  
+                                    ExtractorType extType, 
+                                    DocumentType docuType,
+                                    String document,
+                                    GranularityType granType
+                                )
     {   
-        return extraction(extType, docuType, document, granType, null);
+        return annotate(extType, docuType, document, granType, null);
     }
 
-   public List<Extraction> extraction(   ExtractorType extType, 
-                                         DocumentType docuType,
-                                         String document,
-                                         GranularityType granType,
-                                         Long timeout
-                                     ) 
+   public List<Entity> annotate(   
+                                   ExtractorType extType, 
+                                   DocumentType docuType,
+                                   String document,
+                                   GranularityType granType,
+                                   Long timeout
+                               ) 
    {        
        String extractor = LookUp.mapExtractor(extType);
        String granularity = LookUp.mapGranularity(granType);
        
-       return NERDResult.getExtraction(API_HOST, 
+       return NERDResult.doAnnotation( API_HOST, 
                                        apiKey, 
                                        extractor, 
                                        docuType,
@@ -124,5 +130,4 @@ public class NERD {
                                        granularity, 
                                        timeout);
    }
-
 }

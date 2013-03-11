@@ -19,15 +19,13 @@ import fr.eurecom.nerd.client.type.GranularityType;
 
 public class LookUp {
     
-    
-
     protected static String mapExtractor(ExtractorType extractor) 
     {
         switch(extractor) 
         {
         case ALCHEMYAPI: 
             return "alchemyapi";
-        case DBPEDIA_SPOTLIGHT:
+        case DBSPOTLIGHT:
             return "dbspotlight";
         case EVRI:
             return "evri";
@@ -41,6 +39,8 @@ public class LookUp {
             return "saplo";
         case SEMITAGS:
             return "semitags"; 
+        case TEXTRAZOR:
+            return "textrazor";
         case WIKIMETA: 
             return "wikimeta";
         case YAHOO:

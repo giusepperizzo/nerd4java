@@ -38,7 +38,8 @@ public class NERDResult extends Request{
     protected static Integer postDocument  (   String uri, 
                                                String apiKey,
                                                DocumentType docuType,
-                                               String text ) 
+                                               String text 
+                                            ) 
     {
         Gson gson = new Gson();
         MultivaluedMap<String,String> params =  new MultivaluedMapImpl();

@@ -27,6 +27,5 @@ public enum ExtractorType {
     WIKIMETA,
     YAHOO,
     ZEMANTA,
-    COMBINED,
-    DATATXT
+    COMBINED
 }

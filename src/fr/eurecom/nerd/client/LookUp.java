@@ -49,8 +49,6 @@ public class LookUp {
             return "zemanta";
         case COMBINED:
             return "combined";
-        case DATATXT:
-        	return "datatxt";
         }
         return null;
     }

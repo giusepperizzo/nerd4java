@@ -55,7 +55,7 @@ public class NERD {
                                 String document
                               ) 
     {        
-        return annotateJSON(extType, docuType, document, GranularityType.OEN, null);
+        return annotateJSON(extType, docuType, document, GranularityType.OEN, null, true, false);
     }
     
     public String annotateJSON(
@@ -65,7 +65,7 @@ public class NERD {
                                 GranularityType granType
                                ) 
     {
-        return annotateJSON(extType, docuType, document, granType, null);
+        return annotateJSON(extType, docuType, document, granType, null, true, false);
     }
 
     public String annotateJSON(
@@ -73,7 +73,9 @@ public class NERD {
                                 DocumentType docuType,
                                 String document,
                                 GranularityType granType,
-                                Long timeout
+                                Long timeout,
+                                Boolean cache,
+                                Boolean force
                                 ) 
     {
         String extractor = LookUp.mapExtractor(extType);
@@ -85,7 +87,9 @@ public class NERD {
                                             docuType,
                                             document,
                                             granularity,
-                                            timeout);
+                                            timeout,
+                                            cache,
+                                            force);
     }
 
 
@@ -98,7 +102,7 @@ public class NERD {
                                     String document
                                 )
     {                
-        return annotate(extType, docuType, document, GranularityType.OEN, null);
+        return annotate(extType, docuType, document, GranularityType.OEN, null, true, false);
     }
     
     public List<Entity> annotate(  
@@ -108,7 +112,7 @@ public class NERD {
                                     GranularityType granType
                                 )
     {   
-        return annotate(extType, docuType, document, granType, null);
+        return annotate(extType, docuType, document, granType, null, true,false);
     }
 
    public List<Entity> annotate(   
@@ -116,7 +120,9 @@ public class NERD {
                                    DocumentType docuType,
                                    String document,
                                    GranularityType granType,
-                                   Long timeout
+                                   Long timeout,
+                                   Boolean cache,
+                                   Boolean force
                                ) 
    {        
        String extractor = LookUp.mapExtractor(extType);
@@ -128,6 +134,8 @@ public class NERD {
                                        docuType,
                                        document,
                                        granularity, 
-                                       timeout);
+                                       timeout,
+                                       cache,
+                                       force);
    }
 }

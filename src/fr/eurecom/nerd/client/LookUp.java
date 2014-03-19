@@ -25,12 +25,10 @@ public class LookUp {
         {
         case ALCHEMYAPI: 
             return "alchemyapi";
+        case DATATXT:
+        	return "datatxt";
         case DBSPOTLIGHT:
             return "dbspotlight";
-        case EVRI:
-            return "evri";
-        case EXTRACTIV:
-            return "extractiv"; 
         case LUPEDIA:
             return "lupedia";           
         case OPENCALAIS:
@@ -41,6 +39,8 @@ public class LookUp {
             return "semitags"; 
         case TEXTRAZOR:
             return "textrazor";
+        case THD: 
+        	return "thd";
         case WIKIMETA: 
             return "wikimeta";
         case YAHOO:

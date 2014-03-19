@@ -12,7 +12,6 @@
 // your option) any later version. See the file Documentation/GPL3 in the
 // original distribution for details. There is ABSOLUTELY NO warranty.
 
-
 package fr.eurecom.nerd.client;
 
 import java.lang.reflect.Type;
@@ -104,7 +103,9 @@ public class NERDResult extends Request{
                                                 DocumentType docuType,
                                                 String text, 
                                                 String granularity,
-                                                Long timeout
+                                                Long timeout,
+                                                Boolean cache,
+                                                Boolean force
                                              ) 
     {
         Gson gson = new Gson();
@@ -125,6 +126,8 @@ public class NERDResult extends Request{
         params.add("extractor", extractor);
         params.add("idDocument", document.getIdDocument().toString());
         if(timeout!=null) params.add("timeout", timeout.toString());
+        if(cache!=true) params.add("cache", cache.toString());
+        if(force==true) params.add("force", force.toString());
         String jsonAnnotation = request(uri.concat("annotation"), RequestType.POST, params);
         Annotation annotation = gson.fromJson(jsonAnnotation, Annotation.class);
         
@@ -145,12 +148,14 @@ public class NERDResult extends Request{
                                                     DocumentType docuType,
                                                     String text, 
                                                     String granularity,
-                                                    Long timeout
+                                                    Long timeout,
+                                                    Boolean cache,
+                                                    Boolean force
                                                 ) 
     {
         Gson gson = new Gson();
         
-        String json = doAnnotationJSON(uri, apiKey, extractor, docuType, text, granularity, timeout);
+        String json = doAnnotationJSON(uri, apiKey, extractor, docuType, text, granularity, timeout, cache, force);
         
         Type listType = new TypeToken<List<Entity>>(){}.getType();
         List<Entity> entities = gson.fromJson(json, listType);

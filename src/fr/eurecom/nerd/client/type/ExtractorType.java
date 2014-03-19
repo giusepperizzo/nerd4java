@@ -16,14 +16,14 @@ package fr.eurecom.nerd.client.type;
 
 public enum ExtractorType {
     ALCHEMYAPI,
+    DATATXT,
     DBSPOTLIGHT,
-    EVRI,
-    EXTRACTIV,
     LUPEDIA,
     OPENCALAIS,
     SAPLO,
     SEMITAGS,
     TEXTRAZOR,
+    THD,
     WIKIMETA,
     YAHOO,
     ZEMANTA,

@@ -6,11 +6,8 @@
   
     <properties>
         <java.version>1.7</java.version>
-        <slf4j.version>1.7.5</slf4j.version>
         <junit.version>4.11</junit.version>
-        <jena.version>2.11.1</jena.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring.version>3.2.10.RELEASE</spring.version>
     </properties>  
   
     <dependencies>
@@ -42,6 +39,26 @@
                     <target>${java.version}</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                        </manifest>
+                    </archive>
+                </configuration>
+                <executions>
+                    <execution>
+                    <phase>package</phase>
+                    <goals> <goal>single</goal> </goals>
+                    </execution>
+                </executions>
+            </plugin>                    
         </plugins>
-  </build>
+    </build>
 </project>

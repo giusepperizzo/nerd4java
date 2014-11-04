@@ -49,6 +49,8 @@ public class LookUp {
             return "zemanta";
         case COMBINED:
             return "combined";
+        case NERDML:
+        	return "nerdml";
         }
         return null;
     }

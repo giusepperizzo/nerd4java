@@ -34,6 +34,26 @@ public class NERDResult extends Request{
     /*
      *  post object and get its id
      */
+	protected static Document getDocument (
+											String uri, 
+								            String apiKey,
+								            DocumentType docuType,
+								            String text 
+										  ) 
+	{
+        Gson gson = new Gson();
+		Integer idDocument = postDocument(uri, apiKey, docuType, text);
+		       
+        // read extraction from annotation
+        MultivaluedMap<String,String> params =  new MultivaluedMapImpl();
+        String jsonDocument = request(uri.replace("/api", "")
+        								.concat("document/")
+        								.concat(idDocument.toString()), 
+        							  RequestType.GET, params);
+        Document document = gson.fromJson(jsonDocument, Document.class);
+		return document;
+	}
+	
     protected static Integer postDocument  (   String uri, 
                                                String apiKey,
                                                DocumentType docuType,

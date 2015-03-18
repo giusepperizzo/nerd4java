@@ -7,9 +7,11 @@ import junit.framework.TestCase;
 public class LanguageDetection extends TestCase {
 	public void test1() 
 	{
-		NERD nerd = new NERD("TEST");
-		Document d = nerd.getDocument(DocumentType.PLAINTEXT, "Barack Obama is the President of US");
+		//add your NERD API key
+		String apiKey = "";
 		
+		NERD nerd = new NERD(apiKey);
+		Document d = nerd.getDocument(DocumentType.PLAINTEXT, "Barack Obama is the President of US");
 		assertEquals("en", d.getLanguage());
 	}
 }

@@ -25,8 +25,8 @@ public class LookUp {
         {
         case ALCHEMYAPI: 
             return "alchemyapi";
-        case DATATXT:
-        	return "datatxt";
+        case DANDELIONAPI:
+        	return "dandelionapi";
         case DBSPOTLIGHT:
             return "dbspotlight";
         case LUPEDIA:

@@ -18,6 +18,8 @@ package fr.eurecom.nerd.client.schema;
 public class Document {
     private Integer idDocument;
     private String text;
+    private String language;
+    
     public String getText() {
         return text;
     }
@@ -30,6 +32,11 @@ public class Document {
     public void setIdDocument(Integer idDocument) {
         this.idDocument = idDocument;
     }
-
+    public String getLanguage() {
+    	return language;
+    }
+    public void setLanguage(String language) {
+    	this.language = language;
+    }
 
 }

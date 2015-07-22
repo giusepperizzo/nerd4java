@@ -16,6 +16,7 @@ package fr.eurecom.nerd.client;
 
 import java.util.List;
 
+import fr.eurecom.nerd.client.schema.Document;
 import fr.eurecom.nerd.client.schema.Entity;
 import fr.eurecom.nerd.client.type.DocumentType;
 import fr.eurecom.nerd.client.type.ExtractorType;
@@ -96,6 +97,11 @@ public class NERD {
     /**
      *   Get collection of Extraction objects
      */
+    public Document getDocument (DocumentType docuType, String document) 
+    {
+        return NERDResult.getDocument( API_HOST, apiKey, docuType, document);
+    }
+    
     public List<Entity> annotate(
                                     ExtractorType extType, 
                                     DocumentType docuType,

@@ -9,7 +9,7 @@ Include the library in your project and then:
   
     String text = read_your_text_file();
     NERD nerd = new NERD(YOUR_API_KEY);
-    String json = nerd.annotateJSON(ExtractorType.COMBINED, 
+    String json = nerd.annotateJSON(ExtractorType.NERDML, 
                                     DocumentType.PLAINTEXT,
                                     text);
     System.out.println(json);

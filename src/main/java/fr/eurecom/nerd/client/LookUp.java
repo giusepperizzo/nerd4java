@@ -66,4 +66,54 @@ public class LookUp {
         }
         return null;
     }
+    
+        public static ExtractorType mapExtractorStringType(String extractor) throws Exception 
+    {    
+        if(extractor.equals("alchemyapi")) 
+            return ExtractorType.ALCHEMYAPI;
+        
+        else if (extractor.equals("combined"))
+            return ExtractorType.COMBINED;
+        
+        else if (extractor.equals("dbspotlight"))
+            return ExtractorType.DBSPOTLIGHT;
+        
+        else if (extractor.equals("lupedia"))
+            return ExtractorType.LUPEDIA;
+        
+        else if (extractor.equals("opencalais"))
+            return ExtractorType.OPENCALAIS;
+        
+        else if (extractor.equals("saplo"))
+            return ExtractorType.SAPLO;        
+                
+        else if (extractor.equals("semitags"))
+            return ExtractorType.SEMITAGS;
+        
+        else if (extractor.equals("textrazor"))
+            return ExtractorType.TEXTRAZOR;
+        
+        else if (extractor.equals("wikimeta"))
+            return ExtractorType.WIKIMETA;
+        
+        else if(extractor.equals("yahoo"))
+            return ExtractorType.YAHOO;
+        
+        else if(extractor.equals("zemanta"))
+            return ExtractorType.ZEMANTA;
+        
+        else if(extractor.equals("thd"))
+            return ExtractorType.THD;
+        
+        else if(extractor.equals("nerdml"))
+            return ExtractorType.NERDML;
+        
+        else if(extractor.equals("dandelionapi"))
+            return ExtractorType.DANDELIONAPI;
+        else
+            throw new Exception(extractor + " is not supported by the NERD platform yet. " +
+                    "If you are interested to use this extractor through NERD, please send an " +
+                    "email to giuseppe.rizzo@eurecom.fr\n");
+        
+    }
 }

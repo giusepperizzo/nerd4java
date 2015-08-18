@@ -68,6 +68,17 @@ public class NERD {
     {
         return annotateJSON(extType, docuType, document, granType, null, true, false);
     }
+    
+    public String annotateJSON(
+                                ExtractorType extType, 
+                                DocumentType docuType,
+                                String document,
+                                GranularityType granType,
+                                Long timeout
+                               ) 
+    {
+        return annotateJSON(extType, docuType, document, granType, timeout, true, false);
+    }
 
     public String annotateJSON(
                                 ExtractorType extType, 

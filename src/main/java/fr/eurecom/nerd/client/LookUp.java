@@ -19,7 +19,7 @@ import fr.eurecom.nerd.client.type.GranularityType;
 
 public class LookUp {
     
-    protected static String mapExtractor(ExtractorType extractor) 
+    public static String mapExtractor(ExtractorType extractor) 
     {
         switch(extractor) 
         {
